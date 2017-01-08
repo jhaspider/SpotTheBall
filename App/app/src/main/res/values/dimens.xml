@@ -1,0 +1,11 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="heading_30dp">30sp</dimen>
+    <dimen name="heading_20dp">20sp</dimen>
+    <dimen name="hotspot_50dp">50dp</dimen>
+    <dimen name="hotspot_10dp">10dp</dimen>
+    <dimen name="body_15dp">15sp</dimen>
+    <dimen name="hotspot_20dp">20dp</dimen>
+</resources>
