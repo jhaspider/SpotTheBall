@@ -19,11 +19,6 @@
             android:layout_height="match_parent"
             android:scaleType="fitCenter" />
 
-        <!--<ImageView
-            android:id="@+id/hotspot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:src="@drawable/ic_brightness_1_black_24dp" />-->
-
     </RelativeLayout>
 
 
@@ -37,13 +32,27 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="@dimen/hotspot_20dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/txt_life_remaining"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
+            android:text="@string/life_remaining"
+            android:textAlignment="center"
+            android:textColor="@color/icons"
+            android:textSize="@dimen/body_15dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/txt_user_score"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/user_score"
             android:textAlignment="center"
             android:textColor="@color/icons"
             android:textSize="@dimen/body_15dp"
@@ -54,10 +63,11 @@
     <!--BOTTOM Panel-->
     <RelativeLayout
         android:id="@+id/life_out_panel"
+        android:layout_above="@+id/hotspot_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-
+        android:background="@android:color/transparent"
         android:gravity="center"
         android:orientation="horizontal"
         android:visibility="gone">
@@ -65,17 +75,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/primary_light" android:alpha="0.8">
+            android:alpha=".8"
+            android:background="@color/primary_light">
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary_dark"
-            android:padding="@dimen/hotspot_20dp"
             android:layout_alignParentBottom="true"
-            android:gravity="center">
+            android:background="@color/primary_dark"
+            android:gravity="center"
+            android:padding="@dimen/hotspot_20dp">
 
             <TextView
                 android:id="@+id/life_out_text"
@@ -91,5 +102,27 @@
 
 
     </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/circular_progress"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/success_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/success_tick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </RelativeLayout>

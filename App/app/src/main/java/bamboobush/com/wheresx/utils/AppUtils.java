@@ -12,9 +12,15 @@ public final class AppUtils {
 
     // Keys for the shared preferences
     public static final String update_reminder = "update_reminder";
+    public static final String IsFirstTimeLaunch = "is_first_time_launch";
     public static final String IsOutOfLife = "is_out_of_life";
+    public static final String IsClueLessMsgShow = "is_clue_msg";
     public static final String RenewalTime = "renewal_time";
     public static final String LevelIndex = "level_index";
+
+    public static final String GetScore = "get_score";
+    public static final String LifeRemaining = "life_remaining";
+
 
     private AppUtils() {
         throw new AssertionError();

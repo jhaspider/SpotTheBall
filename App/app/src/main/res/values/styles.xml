@@ -9,4 +9,13 @@
 
     </style>
 
+    <style name="F_BottomSheet_RelativeView" >
+
+        <item name="android:gravity">top</item>
+        <item name="android:orientation">vertical</item>
+        <item name="behavior_hideable">true</item>
+        <item name="layout_behavior">android.support.design.widget.BottomSheetBehavior</item>
+        <!--<item name="behavior_peekHeight">@dimen/bottom_sheet_peek_height</item>-->
+    </style>
+
 </resources>

@@ -7,5 +7,6 @@
     <dimen name="hotspot_50dp">50dp</dimen>
     <dimen name="hotspot_10dp">10dp</dimen>
     <dimen name="body_15dp">15sp</dimen>
+    <dimen name="body_10dp">10sp</dimen>
     <dimen name="hotspot_20dp">20dp</dimen>
 </resources>

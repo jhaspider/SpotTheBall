@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:oneshot="true">
+
+
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0011" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0009" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0007" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0005" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0003" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0001" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0001" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0003" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0005" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0007" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0009" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0011" />
+    <item android:duration="30" android:drawable="@drawable/success_frame_animation0011" />
+
+    <!--<item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0009"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0007"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0005"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0003"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0001"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0001"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0003"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0005"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0007"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0009"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0011"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0011"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0011"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0011"/>
+    </item>
+
+    <item android:duration="30">
+        <bitmap android:gravity="center" android:src="@drawable/success_frame_animation0011"/>
+    </item>-->
+
+</animation-list>

@@ -18,6 +18,7 @@ public class SourceImage {
     private int increment_time_min;
 
     private double scale;
+    private int base_score;
 
     private ArrayList<HotSpots> hotSpotsArrayList = new ArrayList<>();
 
@@ -100,5 +101,13 @@ public class SourceImage {
 
     public void setIncrement_time_min(int increment_time_min) {
         this.increment_time_min = increment_time_min;
+    }
+
+    public int getBase_score() {
+        return base_score;
+    }
+
+    public void setBase_score(int base_score) {
+        this.base_score = base_score;
     }
 }
