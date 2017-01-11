@@ -36,6 +36,18 @@ import bamboobush.com.wheresx.utils.BitmapResponse;
 import bamboobush.com.wheresx.utils.BitmapWorkerTask;
 import bamboobush.com.wheresx.utils.PSnackbar;
 
+/**
+ * Created by Amarjit Jha (Fantain) on 03/01/17.
+ * <p>
+ * TODO : - Google Push Notification Integration
+ * TODO : - API Integration & Image caching
+ * TODO : - Offline loading
+ * TODO : - Testing & bug fixing
+ * TODO : - Level completion chart
+ * TODO : - Disclaimer integration
+ */
+
+
 public class StartActivity extends AppCompatActivity
         implements View.OnTouchListener, BitmapResponse, View.OnClickListener, ScoreDetailBottomSheet.OnBottomSheetListener {
 
