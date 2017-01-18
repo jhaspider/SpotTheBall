@@ -120,7 +120,7 @@ public class StartActivity extends AppCompatActivity
         sourceImage = new SourceImage(482,
                 512,
                 "https://s-media-cache-ak0.pinimg.com/originals/fd/77/a8/fd77a80a0380a879722023ab552c6b6f.jpg");
-        sourceImage.setLife(3);
+        sourceImage.setLife(2);
         sourceImage.setIncrement_time_min(3);
         sourceImage.setBase_score(20);
 
@@ -140,7 +140,7 @@ public class StartActivity extends AppCompatActivity
         sourceImage = new SourceImage(700,
                 400,
                 "http://ste.india.com/sites/default/files/2016/04/03/475430-virat-kohli-odis-pull-700.jpg");
-        sourceImage.setLife(4);
+        sourceImage.setLife(1);
         sourceImage.setIncrement_time_min(3);
         sourceImage.setBase_score(20);
 
@@ -156,7 +156,7 @@ public class StartActivity extends AppCompatActivity
         sourceImage = new SourceImage(800,
                 500,
                 "http://cdn.parhlo.com/wp-content/uploads/2015/02/277632621.jpg");
-        sourceImage.setLife(5);
+        sourceImage.setLife(2);
         sourceImage.setIncrement_time_min(4);
         sourceImage.setBase_score(30);
 
