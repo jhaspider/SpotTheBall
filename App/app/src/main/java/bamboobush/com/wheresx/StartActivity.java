@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,7 +52,8 @@ import bamboobush.com.wheresx.utils.PSnackbar;
 public class StartActivity extends AppCompatActivity
         implements View.OnTouchListener, BitmapResponse, View.OnClickListener, ScoreDetailBottomSheet.OnBottomSheetListener {
 
-    private RelativeLayout hotspot_container, life_out_panel;
+    private RelativeLayout hotspot_container;
+    private CardView life_out_panel;
     private LinearLayout heading_container, success_container;
     private TextView txt_life_remaining, life_out_text, txt_user_score;
     private ImageView hotspot, source_image_view, success_tick;
@@ -80,7 +82,7 @@ public class StartActivity extends AppCompatActivity
 
         // Draw some dynamic views over the image to locate the ball
         hotspot_container = (RelativeLayout) findViewById(R.id.hotspot_container);
-        life_out_panel = (RelativeLayout) findViewById(R.id.life_out_panel);
+        life_out_panel = (CardView) findViewById(R.id.life_out_panel);
         life_out_panel.setOnTouchListener(this);
 
         heading_container = (LinearLayout) findViewById(R.id.heading_container);
@@ -294,7 +296,7 @@ public class StartActivity extends AppCompatActivity
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
-        if(v instanceof RelativeLayout){
+        if(v instanceof CardView){
             return true;
         }
 

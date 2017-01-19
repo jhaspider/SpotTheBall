@@ -6,10 +6,14 @@
     <string name="action_next">Next</string>
     <string name="without_hot_spot">Nice Job Done. Try this level without any hotspots.</string>
     <string name="thatsall">That\'s all for now, More attraction coming soon.</string>
-    <string name="life_remaining">Life Remaining \n%s</string>
-    <string name="life_renewal_time">Life Renews In\n%s</string>
+    <string name="life_remaining">%s</string>
+    <string name="life_remaining_label">LIFE</string>
+    <string name="life_renewal_time">%s</string>
     <string name="loading_image">Loading..Please Wait</string>
-    <string name="user_score">Your Score \n%s</string>
+    <string name="user_score">%s</string>
     <string name="could_not_connect">You must connect to internet at least once to try this game.</string>
     <string name="try_again">Try Again</string>
+    <string name="user_score_label">SCORE</string>
+    <string name="user_level">LEVEL</string>
+    <string name="goal_text">1966 more pts to win iPhone</string>
 </resources>
