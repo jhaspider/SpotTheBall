@@ -17,7 +17,6 @@ public final class AppUtils {
     public static final String IsClueLessMsgShow = "is_clue_msg";
     public static final String RenewalTime = "renewal_time";
     public static final String LevelIndex = "level_index";
-
     public static final String GetScore = "get_score";
     public static final String LifeRemaining = "life_remaining";
 

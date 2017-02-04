@@ -1,6 +1,10 @@
 package bamboobush.com.wheresx.data;
 
+import android.content.Context;
+
 import java.util.ArrayList;
+
+import bamboobush.com.wheresx.utils.AppUtils;
 
 /**
  * Created by Amarjit Jha (Fantain) on 03/01/17.
@@ -13,7 +17,6 @@ public class SourceImage {
     private int width, height;
     private String url;
     private int life;
-    private int life_remainning;
     private boolean is_clue_less;
     private int increment_time_min;
 
@@ -53,7 +56,6 @@ public class SourceImage {
         this.height = height;
     }
 
-
     public double getScale() {
         return scale;
     }
@@ -76,7 +78,6 @@ public class SourceImage {
 
     public void setLife(int life) {
         this.life = life;
-        this.life_remainning = life;
     }
 
     public boolean is_clue_less() {
@@ -85,14 +86,6 @@ public class SourceImage {
 
     public void setIs_clue_less(boolean is_clue_less) {
         this.is_clue_less = is_clue_less;
-    }
-
-    public int getLife_remainning() {
-        return life_remainning;
-    }
-
-    public void setLife_remainning(int life_remainning) {
-        this.life_remainning = life_remainning;
     }
 
     public int getIncrement_time_min() {
@@ -110,4 +103,11 @@ public class SourceImage {
     public void setBase_score(int base_score) {
         this.base_score = base_score;
     }
+
+
+    // Database or SQL Lite operation
+    /*public void reduceLife(Context c) {
+        setLife_remainning( life_remainning-1 );
+        AppUtils.setKeyInt(c,AppUtils.LifeRemaining, life_remainning);
+    }*/
 }

@@ -1,12 +1,11 @@
 package bamboobush.com.wheresx;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -25,13 +24,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import bamboobush.com.wheresx.data.HotSpots;
 import bamboobush.com.wheresx.data.SourceImage;
+import bamboobush.com.wheresx.data.User;
+import bamboobush.com.wheresx.databinding.ActivityStartBinding;
 import bamboobush.com.wheresx.fragments.ScoreDetailBottomSheet;
+import bamboobush.com.wheresx.utils.AppGlobal;
 import bamboobush.com.wheresx.utils.AppUtils;
 import bamboobush.com.wheresx.utils.BitmapResponse;
 import bamboobush.com.wheresx.utils.BitmapWorkerTask;
@@ -53,6 +54,7 @@ public class StartActivity extends AppCompatActivity
         implements View.OnTouchListener, BitmapResponse, View.OnClickListener, ScoreDetailBottomSheet.OnBottomSheetListener {
 
     private RelativeLayout hotspot_container;
+    private LinearLayout prize_info;
     private CardView life_out_panel;
     private LinearLayout heading_container, success_container;
     private TextView txt_life_remaining, life_out_text, txt_user_score;
@@ -70,6 +72,8 @@ public class StartActivity extends AppCompatActivity
 
     double taskimage_start_y, taskimage_end_y;
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +82,10 @@ public class StartActivity extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_start);
+        user = AppGlobal.getInstance().getUser();
+        user.initFromSP(getApplicationContext());
+        ActivityStartBinding startBinding = DataBindingUtil.setContentView(this, R.layout.activity_start);
+        startBinding.setUser(user);
 
         // Draw some dynamic views over the image to locate the ball
         hotspot_container = (RelativeLayout) findViewById(R.id.hotspot_container);
@@ -89,7 +96,9 @@ public class StartActivity extends AppCompatActivity
         txt_life_remaining = (TextView) findViewById(R.id.txt_life_remaining);
         //txt_life_remaining.startAnimation();
         txt_user_score = (TextView) findViewById(R.id.txt_user_score);
-        txt_user_score.setOnClickListener(this);
+
+        prize_info = (LinearLayout) findViewById(R.id.prize_info);
+        prize_info.setOnClickListener(this);
 
         life_out_text = (TextView) findViewById(R.id.life_out_text);
         source_image_view = (ImageView) findViewById(R.id.source_image_view);
@@ -106,8 +115,8 @@ public class StartActivity extends AppCompatActivity
         HotSpots hotSpots;
         sourceImage = new SourceImage(501,
                 699,
-                "http://worldcricketevents.com/wp-content/uploads/2015/08/images-for-dhoni-helicopter-shot-against-malinga.img_.jpg");
-        sourceImage.setLife(2);
+                "http://pitthoo.co.in/mahi.jpeg");
+        sourceImage.setLife(5);
         sourceImage.setIncrement_time_min(2);
         sourceImage.setBase_score(10);
         hotSpots = new HotSpots(385,135,true);
@@ -122,7 +131,7 @@ public class StartActivity extends AppCompatActivity
         sourceImage = new SourceImage(482,
                 512,
                 "https://s-media-cache-ak0.pinimg.com/originals/fd/77/a8/fd77a80a0380a879722023ab552c6b6f.jpg");
-        sourceImage.setLife(2);
+        sourceImage.setLife(5);
         sourceImage.setIncrement_time_min(3);
         sourceImage.setBase_score(20);
 
@@ -142,7 +151,7 @@ public class StartActivity extends AppCompatActivity
         sourceImage = new SourceImage(700,
                 400,
                 "http://ste.india.com/sites/default/files/2016/04/03/475430-virat-kohli-odis-pull-700.jpg");
-        sourceImage.setLife(1);
+        sourceImage.setLife(5);
         sourceImage.setIncrement_time_min(3);
         sourceImage.setBase_score(20);
 
@@ -158,7 +167,7 @@ public class StartActivity extends AppCompatActivity
         sourceImage = new SourceImage(800,
                 500,
                 "http://cdn.parhlo.com/wp-content/uploads/2015/02/277632621.jpg");
-        sourceImage.setLife(2);
+        sourceImage.setLife(5);
         sourceImage.setIncrement_time_min(4);
         sourceImage.setBase_score(30);
 
@@ -210,26 +219,28 @@ public class StartActivity extends AppCompatActivity
 
         // Load First task
         // If user was playing some level, start from that level only
-        current_index = AppUtils.getKeyInt(getApplicationContext(),AppUtils.LevelIndex);
+        //current_index = AppUtils.getKeyInt(getApplicationContext(),AppUtils.LevelIndex);
+        current_index = user.getLevel();
         sourceImage = sourceImageArrayList.get(current_index);
-        LoadImage();
 
 
-        boolean isOutOfLife = AppUtils.getKeyBool(getApplicationContext(),AppUtils.IsOutOfLife);
+
+        //boolean isOutOfLife = AppUtils.getKeyBool(getApplicationContext(),AppUtils.IsOutOfLife);
 
         // Show users accumulative score
-        int userScore = AppUtils.getKeyInt(getApplicationContext(),AppUtils.GetScore);
-        ShowScore(userScore);
+        //int userScore = AppUtils.getKeyInt(getApplicationContext(),AppUtils.GetScore);
+        //ShowScore();
 
         // Display remaining life
-        int lifeRemaining = AppUtils.getKeyInt(getApplicationContext(),AppUtils.LifeRemaining);
-        if(lifeRemaining>0 || isOutOfLife ) {
+        //int lifeRemaining = AppUtils.getKeyInt(getApplicationContext(),AppUtils.LifeRemaining);
+        int lifeRemaining = user.getLife_left();
+        /*if(lifeRemaining>0 || isOutOfLife ) {
             sourceImage.setLife_remainning(lifeRemaining);
             LifeRemaining(sourceImage.getLife_remainning());
-        }
+        }*/
 
         // Outoflife scenario handling
-        if(isOutOfLife){
+        if(lifeRemaining==0){
 
             // Show a timer with time remaining for the life to get added
             reinstate_time = AppUtils.getKeyLong(getApplicationContext(),AppUtils.RenewalTime);
@@ -245,13 +256,15 @@ public class StartActivity extends AppCompatActivity
                 snackbar.show();
             }
 
+            LoadImage();
+
         }
 
     }
 
     private void LoadImage() {
         circular_progress.setVisibility(View.VISIBLE);
-        AppUtils.setKeyInt(getApplicationContext(),AppUtils.LevelIndex, current_index);
+
 
         BitmapWorkerTask workerTask = new BitmapWorkerTask();
         workerTask.delegate = this;
@@ -270,6 +283,7 @@ public class StartActivity extends AppCompatActivity
         int y = (int) event.getY();
 
         switch (event.getAction()) {
+
             case MotionEvent.ACTION_DOWN:
                 break;
 
@@ -281,16 +295,16 @@ public class StartActivity extends AppCompatActivity
                         && sourceImage.is_clue_less()
                         && ( y>=taskimage_start_y && y<=taskimage_end_y ) ) {
 
+                    user.decrementLife(getApplicationContext());
                     ReduceLife();
-
                 }
 
                 isTappedOnhotspot = false;
                 break;
         }
 
-
         return super.onTouchEvent(event);
+
     }
 
     @Override
@@ -310,6 +324,7 @@ public class StartActivity extends AppCompatActivity
                     && sourceImage.is_clue_less()
                     && ( y>=taskimage_start_y && y<=taskimage_end_y ) ) {
 
+                user.decrementLife(getApplicationContext());
                 ReduceLife();
             }
             isTappedOnhotspot = false;
@@ -332,11 +347,14 @@ public class StartActivity extends AppCompatActivity
                 v.setVisibility(View.GONE);
 
                 // Update Score & Display
-                int wonScore = sourceImage.getLife_remainning() * sourceImage.getBase_score();
-                int userScore = AppUtils.getKeyInt(getApplicationContext(),AppUtils.GetScore);
-                final int total_score = userScore + wonScore;
-                AppUtils.setKeyInt(getApplicationContext(),AppUtils.GetScore, total_score);
-                ShowScore( total_score );
+                int wonScore = user.getLife_left() * sourceImage.getBase_score();
+                /*int userScore = AppUtils.getKeyInt(getApplicationContext(),AppUtils.GetScore);
+                final int total_score = userScore + wonScore;*/
+
+                // Show the summary of score
+                user.updateScore( getApplicationContext(), wonScore );
+                /*AppUtils.setKeyInt(getApplicationContext(),AppUtils.GetScore, total_score); */
+                //ShowScore();
 
                 // Load Next Level
                 current_index++;
@@ -356,7 +374,12 @@ public class StartActivity extends AppCompatActivity
 
                     // Load the next level
                     sourceImage = sourceImageArrayList.get(current_index);
+                    user.incrementLevel(getApplicationContext());
+                    //user.resetLife( getApplicationContext(), sourceImage.getLife() );
                     LoadImage();
+
+                    // TODO : Animate image loading
+
 
                 } else {
                     // TODO : We should never allow to run into this scenario
@@ -366,7 +389,7 @@ public class StartActivity extends AppCompatActivity
 
 
                 // Show users score and message
-                new Handler().postDelayed(new Runnable() {
+                /*new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         success_container.setVisibility(View.GONE);
@@ -375,7 +398,7 @@ public class StartActivity extends AppCompatActivity
                         promotionPanel.setMessage( getString(R.string.user_score, String.valueOf(total_score)) );
                         promotionPanel.show(getSupportFragmentManager(), "hellow");
                     }
-                }, 700);
+                }, 700);*/
 
 
                 // Tasks :
@@ -418,6 +441,7 @@ public class StartActivity extends AppCompatActivity
 
             } else {
 
+                user.decrementLife(getApplicationContext());
                 ReduceLife();
 
             }
@@ -431,19 +455,15 @@ public class StartActivity extends AppCompatActivity
 
         Animation blink = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
         source_image_view.startAnimation(blink);
-
         txt_life_remaining.startAnimation(blink);
-
-        sourceImage.setLife_remainning( sourceImage.getLife_remainning()-1 );
-        AppUtils.setKeyInt(getApplicationContext(),AppUtils.LifeRemaining, sourceImage.getLife_remainning());
+        //sourceImage.reduceLife(getApplicationContext());
 
         // Check, whether all the life is used
-        if(sourceImage.getLife_remainning()>0) {
+        if(user.getLife_left()>0) {
 
             // TODO : Do some animation to alert the user that life has reduced
-
             // Life remaining display
-            LifeRemaining(sourceImage.getLife_remainning());
+            //LifeRemaining(sourceImage.getLife_remainning());
 
         } else {
 
@@ -465,8 +485,6 @@ public class StartActivity extends AppCompatActivity
     private void SetOutOfLife() {
 
         heading_container.setVisibility(View.GONE);
-        life_out_panel.setVisibility(View.VISIBLE);
-
         timer = new Timer("QuestionTimer");
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -488,8 +506,10 @@ public class StartActivity extends AppCompatActivity
      */
     private void UpdateTimeToLife() {
 
+
         Calendar cal = Calendar.getInstance();
         if(cal.getTimeInMillis()<reinstate_time) {
+            life_out_panel.setVisibility(View.VISIBLE);
             ShowRemainingTime();
         } else {
 
@@ -501,13 +521,13 @@ public class StartActivity extends AppCompatActivity
             AppUtils.setKeyBool(getApplicationContext(),AppUtils.IsOutOfLife, false);
             AppUtils.setKeyLong(getApplicationContext(),AppUtils.RenewalTime, 0);
 
-            sourceImage.setLife_remainning(sourceImage.getLife());
-            AppUtils.setKeyInt(getApplicationContext(),AppUtils.LifeRemaining, sourceImage.getLife_remainning());
-            LifeRemaining(sourceImage.getLife_remainning());
-
             heading_container.setVisibility(View.VISIBLE);
             life_out_panel.setVisibility(View.GONE);
 
+            // Load the current level task
+            // Reset all the lifes
+            user.resetLife(getApplicationContext(), sourceImage.getLife() );
+            LoadImage();
 
         }
     }
@@ -571,8 +591,9 @@ public class StartActivity extends AppCompatActivity
             AddHotSpots(bitmap);
 
             // Show Life Available for this level
-            LifeRemaining(sourceImage.getLife_remainning());
-            AppUtils.setKeyInt(getApplicationContext(), AppUtils.LifeRemaining, sourceImage.getLife_remainning());
+            //LifeRemaining(sourceImage.getLife_remainning());
+            //AppUtils.setKeyInt(getApplicationContext(), AppUtils.LifeRemaining, sourceImage.getLife_remainning());
+            user.resetLife( getApplicationContext(), sourceImage.getLife());
 
             // Hide the progress loader of image
             // Making top panel visible
@@ -587,13 +608,13 @@ public class StartActivity extends AppCompatActivity
      *
      * @param life_remainning
      */
-    private void LifeRemaining(int life_remainning) {
+    /*private void LifeRemaining(int life_remainning) {
         txt_life_remaining.setText( getString(R.string.life_remaining, String.valueOf(life_remainning)) );
-    }
+    }*/
 
-    private void ShowScore(int score ){
-        txt_user_score.setText( getString(R.string.user_score, String.valueOf(score)) );
-    }
+    /*private void ShowScore(){
+        txt_user_score.setText( getString(R.string.user_score, String.valueOf(user.getScore())) );
+    }*/
 
     /**
      * Add the touchable hot spots on the stage in all scenario right after image loading is completed
@@ -659,13 +680,10 @@ public class StartActivity extends AppCompatActivity
 
         switch(v.getId()){
 
-            case R.id.txt_user_score:
+            case R.id.prize_info:
+                Intent summary_panel = new Intent( StartActivity.this, PointSummaryActivity.class);
+                startActivity( summary_panel );
 
-                int userScore = AppUtils.getKeyInt(getApplicationContext(),AppUtils.GetScore);
-
-                ScoreDetailBottomSheet promotionPanel = new ScoreDetailBottomSheet();
-                promotionPanel.setMessage( getString(R.string.user_score, String.valueOf(userScore)) );
-                promotionPanel.show(getSupportFragmentManager(), "hellow");
                 break;
 
         }

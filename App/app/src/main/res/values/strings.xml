@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Where\'s X</string>
+    <string name="app_name">Third Umpire</string>
     <string name="reveal_the_ball">Spot the primary attraction.</string>
     <string name="CONGRAT">C O N G R A T S !!! Want to try more?</string>
     <string name="INCORRECT">INCORRECT, TRY AGAIN.</string>
@@ -15,5 +15,8 @@
     <string name="try_again">Try Again</string>
     <string name="user_score_label">SCORE</string>
     <string name="user_level">LEVEL</string>
-    <string name="goal_text">1966 more pts to win iPhone</string>
+    <string name="goal_text">%s more pts to play for iPhone</string>
+    <string name="title_activity_point_summary">PointSummaryActivity</string>
+    <string name="join_contest_on_pitthoo">Join contest on Pitthoo</string>
+    <string name="renewing_life">Renewing Life</string>
 </resources>

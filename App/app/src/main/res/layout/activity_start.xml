@@ -1,260 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/primary_dark"
-    android:fitsSystemWindows="true"
+
     tools:context="bamboobush.com.wheresx.StartActivity">
 
+    <data>
 
-    <!--TOP PANEL -->
-    <RelativeLayout
-        android:id="@+id/controls"
-        android:layout_alignParentBottom="true"
+        <variable
+            name="User"
+            type="bamboobush.com.wheresx.data.User" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="38dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:src="@drawable/ic_menu" />
-
-        <ImageView
-            android:layout_marginRight="38dp"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:src="@drawable/ic_menu" />
-
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:background="@color/primary_dark"
+        android:fitsSystemWindows="true">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_view"
-            style="@style/cards"
-            android:layout_marginBottom="120dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="40dp"
-            android:background="@color/white"
-            android:visibility="visible">
-
-            <RelativeLayout
-                android:id="@+id/hotspot_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/source_image_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
-
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-
-        <!-- LIFE RENEW PANEL -->
-        <android.support.v7.widget.CardView
-            android:id="@+id/life_out_panel"
-            style="@style/cards"
-            android:layout_marginBottom="@dimen/dp_100"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_100"
-            android:background="@color/white"
+        <!--TOP PANEL -->
+        <RelativeLayout
+            android:id="@+id/controls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="left"
+            android:orientation="horizontal"
             android:visibility="gone">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@+id/hotspot_container"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:gravity="center"
-                android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="38dp"
+                android:src="@drawable/ic_menu" />
 
-                <TextView
-                    android:id="@+id/life_out_text"
-                    style="@style/renew_life"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="38dp"
+                android:src="@drawable/ic_menu" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view"
+                style="@style/cards"
+                android:layout_marginBottom="120dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:background="@color/white"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:id="@+id/hotspot_container"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_50"
-                    android:gravity="center"
-                    android:text="@string/life_renewal_time"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/body_15dp"
-                    android:textStyle="normal" />
+                    android:layout_height="match_parent">
 
-                <LinearLayout
+                    <ImageView
+                        android:id="@+id/source_image_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <!-- LIFE RENEW PANEL -->
+            <android.support.v7.widget.CardView
+                android:id="@+id/life_out_panel"
+                style="@style/cards"
+                android:layout_marginBottom="120dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:background="@color/light_sky_blue"
+                android:visibility="gone">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/life_out_text"
+                    android:layout_above="@+id/hotspot_container"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
                     android:gravity="center"
-                    android:padding="@dimen/hotspot_20dp">
+                    android:orientation="horizontal">
 
-                    <ProgressBar
-                        style="@style/Widget.AppCompat.ProgressBar"
-                        android:layout_width="wrap_content"
+                    <TextView android:id="@+id/intro_text"
+                        android:layout_marginTop="@dimen/dp_50"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:visibility="visible" />
+                        android:text="@string/renewing_life"
+                        android:textSize="30sp"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:id="@+id/life_out_text"
+                        android:layout_below="@+id/intro_text"
+                        style="@style/renew_life"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:gravity="center"
+                        android:text="@string/life_renewal_time"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="normal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/life_out_text"
+                        android:gravity="center"
+                        android:padding="@dimen/hotspot_20dp"
+                        android:weightSum="1">
+
+                        <ProgressBar
+                            style="@style/Widget.AppCompat.ProgressBar"
+                            android:layout_width="@dimen/dp_200"
+                            android:layout_height="@dimen/dp_200"
+                            android:layout_centerInParent="true"
+                            android:visibility="visible"
+                            android:layout_weight="0.34" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!--BOTTOM Panel-->
+            <LinearLayout
+                android:id="@+id/heading_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/prize_info"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:visibility="visible">
+
+                <!-- LIFE -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_life_remaining"
+                        style="@style/remain_life"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@{String.valueOf(User.life_left)}"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/TextStyle3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/life_remaining_label"
+                        android:textAlignment="center" />
 
                 </LinearLayout>
 
 
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
+                <!-- SCORE -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_user_score"
+                        style="@style/remain_life"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@{String.valueOf(User.score)}"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/TextStyle3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/user_score_label"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
 
 
-        <!--BOTTOM Panel-->
-        <LinearLayout
-            android:id="@+id/heading_container"
-            android:layout_above="@+id/prize_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="@dimen/hotspot_20dp"
-            android:visibility="visible">
+                <!-- LEVEL -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <!-- LIFE -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/txt_user_level"
+                        style="@style/remain_life"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@{String.valueOf(User.level+1)}"
+                        android:textAlignment="center" />
 
-                <TextView
-                    android:id="@+id/txt_life_remaining"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    style="@style/remain_life"
-                    android:text="@string/life_remaining"
-                    android:textAlignment="center"/>
+                    <TextView
+                        style="@style/TextStyle3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/user_level"
+                        android:textAlignment="center" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/life_remaining_label"
-                    android:textAlignment="center"
-                    style="@style/TextStyle3" />
+                </LinearLayout>
+
 
             </LinearLayout>
 
-
-            <!-- SCORE -->
+            <!-- Information about prize -->
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txt_user_score"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    style="@style/remain_life"
-                    android:text="@string/life_remaining"
-                    android:textAlignment="center"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/user_score_label"
-                    android:textAlignment="center"
-                    style="@style/TextStyle3" />
-
-            </LinearLayout>
-
-
-            <!-- LEVEL -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txt_user_level"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    style="@style/remain_life"
-                    android:text="@string/life_remaining"
-                    android:textAlignment="center"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/user_level"
-                    android:textAlignment="center"
-                    style="@style/TextStyle3" />
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-
-        <!-- Information about prize -->
-        <LinearLayout
-            android:id="@+id/prize_info"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:src="@drawable/ic_expand_info" />
-
-            <Button
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginBottom="-10dp"
+                android:id="@+id/prize_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/goal_text"
-                android:background="@drawable/rounded_corner_panel"/>
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_expand_info" />
 
-        <ProgressBar
-            android:id="@+id/circular_progress"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="-15dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:textSize="12sp"
+                    android:background="@drawable/rounded_corner_panel"
+                    android:text="@{String.format(@string/goal_text,User.contest_score-User.score)}" />
 
-        <LinearLayout
-            android:id="@+id/success_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:visibility="gone">
+            </LinearLayout>
 
-            <ImageView
-                android:id="@+id/success_tick"
+
+            <!-- Userful to showcase image loading -->
+            <ProgressBar
+                android:id="@+id/circular_progress"
+                style="@style/Widget.AppCompat.ProgressBar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
 
-        </LinearLayout>
 
-    </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+            <LinearLayout
+                android:id="@+id/success_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/success_tick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
