@@ -3,13 +3,16 @@ package bamboobush.com.wheresx;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 
 import bamboobush.com.wheresx.databinding.ActivityPointSummaryBinding;
 import bamboobush.com.wheresx.utils.AppGlobal;
+import bamboobush.com.wheresx.utils.PitthooDialog;
 
-public class PointSummaryActivity extends AppCompatActivity {
+public class PointSummaryActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,23 +22,24 @@ public class PointSummaryActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        /*ImageButton btnClose = (ImageButton) findViewById(R.id.btnClose);
+        btnClose.setOnClickListener(this);*/
         // Assigning data binding objects
         ActivityPointSummaryBinding pointSummaryBinding = DataBindingUtil.setContentView(this, R.layout.activity_point_summary);
         pointSummaryBinding.setUser(AppGlobal.getInstance().getUser() );
+        pointSummaryBinding.setHandler( this );
 
 
+    }
 
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
+    public void onCloseClicked(View v) {
+        super.onBackPressed();
+    }
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+    public void aboutPitthoo(View v){
+
+        PitthooDialog pitthooDialog = new PitthooDialog(this);
+        pitthooDialog.show();
 
     }
 

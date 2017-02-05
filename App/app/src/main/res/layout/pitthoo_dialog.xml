@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="handler"
+            type="bamboobush.com.wheresx.utils.PitthooDialog" />
+
+        <variable
+            name="User"
+            type="bamboobush.com.wheresx.data.User" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_20">
+
+
+        <TextView
+            style="@style/PitthooHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="How does it works?" />
+
+        <TextView
+            style="@style/BodyText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@{String.format(@string/instruction,User.contest_score)}"
+            android:textColor="@color/secondary_text" />
+
+        <Button
+            style="@style/NotifyBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_30"
+            android:background="@color/primary_dark"
+            android:text="@string/notify_me" />
+
+    </LinearLayout>
+</layout>

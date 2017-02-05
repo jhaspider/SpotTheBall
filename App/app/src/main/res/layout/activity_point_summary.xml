@@ -6,6 +6,9 @@
     <!-- Data binding with user objects -->
     <data>
         <variable
+            name="handler"
+            type="bamboobush.com.wheresx.PointSummaryActivity" />
+        <variable
             name="User"
             type="bamboobush.com.wheresx.data.User" />
 
@@ -18,20 +21,6 @@
         android:background="@color/primary"
         android:fitsSystemWindows="true"
         tools:context="bamboobush.com.wheresx.PointSummaryActivity">
-
-        <!--<android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </android.support.design.widget.AppBarLayout>-->
 
         <LinearLayout
             android:id="@+id/content_point_summary"
@@ -46,17 +35,18 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/cardview_dark_background">
+                android:layout_height="wrap_content">
 
                 <ImageButton
+                    android:id="@+id/btnClose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerInParent="true"
                     android:background="@android:color/transparent"
                     android:padding="@dimen/dp_10"
-                    android:src="@drawable/white" />
+                    android:src="@drawable/white"
+                    android:onClick="@{handler.onCloseClicked}"/>
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -65,6 +55,7 @@
                     android:layout_centerInParent="true"
                     android:background="@android:color/transparent"
                     android:padding="@dimen/dp_10"
+                    android:visibility="gone"
                     android:src="@drawable/ic_volume_up" />
 
 
@@ -74,13 +65,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dm_75"
+                android:layout_marginTop="@dimen/dm_50"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(User.score)}"
+                    android:text="@{String.valueOf(User.score),default=0}"
                     android:textColor="@color/white"
                     android:textSize="120sp" />
 
@@ -88,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-16dp"
-                    android:text="Points score till now"
+                    android:text="@string/your_score"
                     android:textColor="@color/secondary_text"
                     android:textSize="14sp" />
 
@@ -106,7 +97,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{String.valueOf(User.contest_score)}"
+                        android:text="@{String.valueOf(User.contest_score),default=0}"
                         android:textColor="@color/white"
                         android:textSize="60sp" />
 
@@ -116,6 +107,7 @@
                         android:layout_marginLeft="20dp"
                         android:background="@android:color/transparent"
                         android:scaleType="fitCenter"
+                        android:onClick="@{handler.aboutPitthoo}"
                         android:src="@drawable/combined_shape" />
 
                 </LinearLayout>
@@ -125,7 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-10dp"
-                    android:text="Chance to win Samsung Galaxy"
+                    android:text="@string/goal_text_profile"
                     android:textColor="@color/secondary_text"
                     android:textSize="14sp" />
 
@@ -140,18 +132,12 @@
                 android:paddingBottom="20dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
+                android:enabled="false"
                 android:text="@string/join_contest_on_pitthoo"/>
 
 
         </LinearLayout>
 
-        <!--<android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email" />-->
-
     </android.support.design.widget.CoordinatorLayout>
+
 </layout>

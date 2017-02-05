@@ -11,11 +11,13 @@
     <dimen name="hotspot_20dp">20dp</dimen>
     <dimen name="dp_50">50dp</dimen>
     <dimen name="dp_10">10dp</dimen>
-    <dimen name="dp_20">30dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
     <dimen name="cards">10dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="summary_content">30dp</dimen>
     <dimen name="dm_75">75dp</dimen>
     <dimen name="dp_200">200dp</dimen>
     <dimen name="dp_100">100dp</dimen>
+    <dimen name="dm_50">50dp</dimen>
 </resources>

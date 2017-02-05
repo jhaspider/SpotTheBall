@@ -101,9 +101,31 @@
         <item name="android:shadowDy">10</item>
     </style>
 
+    <style name="PitthooHeading">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">roboto</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/primary_dark</item>
+    </style>
+
+    <style name="BodyText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">roboto</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NotifyBtn">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">HelveticaNeue</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingLeft">@dimen/dp_30</item>
+        <item name="android:paddingRight">@dimen/dp_30</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
 
 </resources>

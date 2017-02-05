@@ -3,6 +3,7 @@
 
     <color name="primary_dark">#1c1c1c</color>
     <color name="primary">#4a4a4a</color>
+    <color name="notify_background">#2e2d2d</color>
     <color name="primary_light">#8c8c8c</color>
     <color name="white">#ffffff</color>
     <color name="sky">#86caff</color>

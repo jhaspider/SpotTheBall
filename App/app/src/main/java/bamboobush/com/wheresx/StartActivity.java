@@ -41,6 +41,12 @@ import bamboobush.com.wheresx.utils.PSnackbar;
 /**
  * Created by Amarjit Jha (Fantain) on 03/01/17.
  * <p>
+ * TODO : Rel 1.0
+ *     - Proportion of image to be set in local database
+ *     - ADD CC Image
+ *     - UI to be 100% completed
+ *     - Create 10 levels of game & upload
+ *     - Deep link Pitthoo for download and enter the contest
  * TODO : - Google Push Notification Integration
  * TODO : - API Integration & Image caching
  * TODO : - Offline loading
@@ -223,23 +229,8 @@ public class StartActivity extends AppCompatActivity
         current_index = user.getLevel();
         sourceImage = sourceImageArrayList.get(current_index);
 
-
-
-        //boolean isOutOfLife = AppUtils.getKeyBool(getApplicationContext(),AppUtils.IsOutOfLife);
-
-        // Show users accumulative score
-        //int userScore = AppUtils.getKeyInt(getApplicationContext(),AppUtils.GetScore);
-        //ShowScore();
-
-        // Display remaining life
-        //int lifeRemaining = AppUtils.getKeyInt(getApplicationContext(),AppUtils.LifeRemaining);
+        // Validate, whether life remaining for the user
         int lifeRemaining = user.getLife_left();
-        /*if(lifeRemaining>0 || isOutOfLife ) {
-            sourceImage.setLife_remainning(lifeRemaining);
-            LifeRemaining(sourceImage.getLife_remainning());
-        }*/
-
-        // Outoflife scenario handling
         if(lifeRemaining==0){
 
             // Show a timer with time remaining for the life to get added
@@ -348,13 +339,7 @@ public class StartActivity extends AppCompatActivity
 
                 // Update Score & Display
                 int wonScore = user.getLife_left() * sourceImage.getBase_score();
-                /*int userScore = AppUtils.getKeyInt(getApplicationContext(),AppUtils.GetScore);
-                final int total_score = userScore + wonScore;*/
-
-                // Show the summary of score
                 user.updateScore( getApplicationContext(), wonScore );
-                /*AppUtils.setKeyInt(getApplicationContext(),AppUtils.GetScore, total_score); */
-                //ShowScore();
 
                 // Load Next Level
                 current_index++;
@@ -367,6 +352,7 @@ public class StartActivity extends AppCompatActivity
                             hotspot_container.removeView( hotspot );
                         }
                     }
+
                     // Remove image of the current level
                     source_image_view.setImageBitmap(null);
                     heading_container.setVisibility(View.GONE);
@@ -375,7 +361,6 @@ public class StartActivity extends AppCompatActivity
                     // Load the next level
                     sourceImage = sourceImageArrayList.get(current_index);
                     user.incrementLevel(getApplicationContext());
-                    //user.resetLife( getApplicationContext(), sourceImage.getLife() );
                     LoadImage();
 
                     // TODO : Animate image loading
@@ -387,57 +372,6 @@ public class StartActivity extends AppCompatActivity
                     heading_container.setVisibility(View.VISIBLE);
                 }
 
-
-                // Show users score and message
-                /*new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        success_container.setVisibility(View.GONE);
-
-                        ScoreDetailBottomSheet promotionPanel = new ScoreDetailBottomSheet();
-                        promotionPanel.setMessage( getString(R.string.user_score, String.valueOf(total_score)) );
-                        promotionPanel.show(getSupportFragmentManager(), "hellow");
-                    }
-                }, 700);*/
-
-
-                // Tasks :
-                //  - Play some animation to celebrate the success of the user
-                //  - Add points to user account
-                //  - Ask user to connect ones mobile number (Optional)
-                //  - When user reaches some threshold value/points, Prompt them to redeem the points on Pitthoo for a reward
-                /*snackbar = PSnackbar.make(findViewById(android.R.id.content),getString(R.string.CONGRAT),Snackbar.LENGTH_INDEFINITE);
-                snackbar.setAction(getString(R.string.action_next), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        current_index++;
-                        if(current_index<sourceImageArrayList.size()) {
-
-                            // Delete, if there was any previous hot spot on the stage
-                            if(hotspotImageViews.size()>0){
-                                for(int i=0; i<hotspotImageViews.size(); i++) {
-                                    hotspot = hotspotImageViews.get(i);
-                                    hotspot_container.removeView( hotspot );
-                                }
-                            }
-                            // Remove image of the current level
-                            source_image_view.setImageBitmap(null);
-                            heading_container.setVisibility(View.GONE);
-                            life_out_panel.setVisibility(View.GONE);
-
-                            // Load the next level
-                            sourceImage = sourceImageArrayList.get(current_index);
-                            LoadImage();
-
-                        } else {
-                            hotspot_container.setVisibility(View.GONE);
-                            heading_container.setVisibility(View.VISIBLE);
-                        }
-
-                    }
-                });
-                snackbar.show();*/
 
             } else {
 
@@ -456,7 +390,6 @@ public class StartActivity extends AppCompatActivity
         Animation blink = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
         source_image_view.startAnimation(blink);
         txt_life_remaining.startAnimation(blink);
-        //sourceImage.reduceLife(getApplicationContext());
 
         // Check, whether all the life is used
         if(user.getLife_left()>0) {
@@ -591,8 +524,6 @@ public class StartActivity extends AppCompatActivity
             AddHotSpots(bitmap);
 
             // Show Life Available for this level
-            //LifeRemaining(sourceImage.getLife_remainning());
-            //AppUtils.setKeyInt(getApplicationContext(), AppUtils.LifeRemaining, sourceImage.getLife_remainning());
             user.resetLife( getApplicationContext(), sourceImage.getLife());
 
             // Hide the progress loader of image
@@ -603,18 +534,6 @@ public class StartActivity extends AppCompatActivity
 
     }
 
-    /**
-     * Shows the life remaining counter to the user
-     *
-     * @param life_remainning
-     */
-    /*private void LifeRemaining(int life_remainning) {
-        txt_life_remaining.setText( getString(R.string.life_remaining, String.valueOf(life_remainning)) );
-    }*/
-
-    /*private void ShowScore(){
-        txt_user_score.setText( getString(R.string.user_score, String.valueOf(user.getScore())) );
-    }*/
 
     /**
      * Add the touchable hot spots on the stage in all scenario right after image loading is completed

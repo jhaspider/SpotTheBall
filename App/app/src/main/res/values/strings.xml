@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Third Umpire</string>
+    <string name="app_name">PitchQ</string>
     <string name="reveal_the_ball">Spot the primary attraction.</string>
     <string name="CONGRAT">C O N G R A T S !!! Want to try more?</string>
     <string name="INCORRECT">INCORRECT, TRY AGAIN.</string>
@@ -15,8 +15,16 @@
     <string name="try_again">Try Again</string>
     <string name="user_score_label">SCORE</string>
     <string name="user_level">LEVEL</string>
-    <string name="goal_text">%s more pts to play for iPhone</string>
+    <string name="goal_text">%s pts to play for iPhone</string>
+    <string name="goal_text_profile">Points to play for iPhone</string>
     <string name="title_activity_point_summary">PointSummaryActivity</string>
-    <string name="join_contest_on_pitthoo">Join contest on Pitthoo</string>
+    <string name="join_contest_on_pitthoo">Play for iPhone</string>
     <string name="renewing_life">Renewing Life</string>
+    <string name="your_score">Points scored till now</string>
+    <string name="instruction"><![CDATA[
+    1. Complete %s pts to participate in a multiple choice contest\n\n
+    2. Most correct & quickest answer wins the game\n\n
+    3. To know more, download Pitthoo.
+    ]]></string>
+    <string name="notify_me">Notify Me</string>
 </resources>
