@@ -132,7 +132,8 @@
                 android:paddingBottom="20dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
-                android:enabled="false"
+                android:enabled="@{(User.score>User.contest_score)?true:false, default=false}"
+                android:onClick="@{handler.downloadPitthoo}"
                 android:text="@string/join_contest_on_pitthoo"/>
 
 

@@ -22,6 +22,11 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Timer;
@@ -34,9 +39,12 @@ import bamboobush.com.wheresx.databinding.ActivityStartBinding;
 import bamboobush.com.wheresx.fragments.ScoreDetailBottomSheet;
 import bamboobush.com.wheresx.utils.AppGlobal;
 import bamboobush.com.wheresx.utils.AppUtils;
+import bamboobush.com.wheresx.utils.AsyncResponse;
 import bamboobush.com.wheresx.utils.BitmapResponse;
 import bamboobush.com.wheresx.utils.BitmapWorkerTask;
 import bamboobush.com.wheresx.utils.PSnackbar;
+import bamboobush.com.wheresx.utils.PitchQAsyn;
+import bamboobush.com.wheresx.utils.Urls;
 
 /**
  * Created by Amarjit Jha (Fantain) on 03/01/17.
@@ -57,7 +65,7 @@ import bamboobush.com.wheresx.utils.PSnackbar;
 
 
 public class StartActivity extends AppCompatActivity
-        implements View.OnTouchListener, BitmapResponse, View.OnClickListener, ScoreDetailBottomSheet.OnBottomSheetListener {
+        implements View.OnTouchListener, BitmapResponse, View.OnClickListener, ScoreDetailBottomSheet.OnBottomSheetListener, AsyncResponse {
 
     private RelativeLayout hotspot_container;
     private LinearLayout prize_info;
@@ -77,6 +85,7 @@ public class StartActivity extends AppCompatActivity
     private AnimationDrawable tickAnimation;
 
     double taskimage_start_y, taskimage_end_y;
+    ActivityStartBinding startBinding;
 
     User user;
 
@@ -90,7 +99,7 @@ public class StartActivity extends AppCompatActivity
 
         user = AppGlobal.getInstance().getUser();
         user.initFromSP(getApplicationContext());
-        ActivityStartBinding startBinding = DataBindingUtil.setContentView(this, R.layout.activity_start);
+        startBinding = DataBindingUtil.setContentView(this, R.layout.activity_start);
         startBinding.setUser(user);
 
         // Draw some dynamic views over the image to locate the ball
@@ -117,111 +126,27 @@ public class StartActivity extends AppCompatActivity
         success_tick.setBackgroundResource(R.drawable.picked_correctly);
         tickAnimation = (AnimationDrawable) success_tick.getBackground();
 
-        // Item 1
-        HotSpots hotSpots;
-        sourceImage = new SourceImage(501,
-                699,
-                "http://pitthoo.co.in/mahi.jpeg");
-        sourceImage.setLife(5);
-        sourceImage.setIncrement_time_min(2);
-        sourceImage.setBase_score(10);
-        hotSpots = new HotSpots(385,135,true);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
 
-        hotSpots = new HotSpots(160,200,false);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
+        // Call to load tasks
+        loadTasks();
 
-        sourceImageArrayList.add( sourceImage );
+    }
 
+    private void loadTasks() {
+        PitchQAsyn pitchQAsyn = new PitchQAsyn();
+        pitchQAsyn.type = PitchQAsyn.GET_TASKS;
+        pitchQAsyn.delegate = this;
+        String urlParams = "";
+        try {
+            urlParams = "&version_code="+BuildConfig.VERSION_CODE;
+        }catch(Exception e){
+            Log.e("ParamsException-->", e.getMessage());
+        }
+        Object[] obj = new Object[]{Urls.playing_tasks,urlParams};
+        pitchQAsyn.execute(obj);
+    }
 
-        sourceImage = new SourceImage(482,
-                512,
-                "https://s-media-cache-ak0.pinimg.com/originals/fd/77/a8/fd77a80a0380a879722023ab552c6b6f.jpg");
-        sourceImage.setLife(5);
-        sourceImage.setIncrement_time_min(3);
-        sourceImage.setBase_score(20);
-
-        hotSpots = new HotSpots(71,276,true);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
-
-        hotSpots = new HotSpots(405,430,false);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
-
-        hotSpots = new HotSpots(100,316,false);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
-
-        sourceImageArrayList.add( sourceImage );
-
-
-        // Item 2
-        sourceImage = new SourceImage(700,
-                400,
-                "http://ste.india.com/sites/default/files/2016/04/03/475430-virat-kohli-odis-pull-700.jpg");
-        sourceImage.setLife(5);
-        sourceImage.setIncrement_time_min(3);
-        sourceImage.setBase_score(20);
-
-        hotSpots = new HotSpots(577,229,true);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
-
-        hotSpots = new HotSpots(463,296,false);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
-
-        sourceImageArrayList.add( sourceImage );
-
-        // Item 3
-        sourceImage = new SourceImage(800,
-                500,
-                "http://cdn.parhlo.com/wp-content/uploads/2015/02/277632621.jpg");
-        sourceImage.setLife(5);
-        sourceImage.setIncrement_time_min(4);
-        sourceImage.setBase_score(30);
-
-        hotSpots = new HotSpots(335,59,true);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
-
-        hotSpots = new HotSpots(236,355,false);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
-
-        hotSpots = new HotSpots(544,400,false);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
-
-        sourceImageArrayList.add( sourceImage );
-
-        // Item 4
-        sourceImage = new SourceImage(628,
-                673,
-                "http://st2.cricketcountry.com/wp-content/uploads/cricket/image_20131015131036.jpg");
-        sourceImage.setLife(5);
-        sourceImage.setIncrement_time_min(5);
-        sourceImage.setBase_score(40);
-
-        sourceImage.setIs_clue_less(true);
-        hotSpots = new HotSpots(50,200,true);
-        hotSpots.setVisible(false);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
-
-        sourceImageArrayList.add( sourceImage );
-
-        // Item 5
-
-        sourceImage = new SourceImage(500,
-                668,
-                "http://pitthoo.co.in/mahi.jpeg");
-        sourceImage.setLife(5);
-        sourceImage.setIncrement_time_min(10);
-        sourceImage.setBase_score(50);
-
-        sourceImage.setIs_clue_less(true);
-        hotSpots = new HotSpots(53,509,true);
-        hotSpots.setVisible(false);
-        sourceImage.getHotSpotsArrayList().add( hotSpots );
-
-        sourceImageArrayList.add( sourceImage );
-
-
-
-
+    private void continueSetup() {
 
         // Load First task
         // If user was playing some level, start from that level only
@@ -250,7 +175,6 @@ public class StartActivity extends AppCompatActivity
             LoadImage();
 
         }
-
     }
 
     private void LoadImage() {
@@ -645,5 +569,72 @@ public class StartActivity extends AppCompatActivity
         }
 
     }
+
+    @Override
+    public void processFinish(String type, String output) {
+
+        if(type.equals(PitchQAsyn.GET_TASKS)){
+
+            JSONObject obj = null;
+            try {
+                obj = new JSONObject(output);
+                if (obj.getString("status").equals("1")) {
+                    startBinding.setIsDataLoaded(true);
+                    JSONArray tasksJA = obj.getJSONArray("tasks");
+                    JSONObject taskJO;
+                    JSONArray hotSpotJA;
+                    JSONObject hotSpotJO;
+
+                    HotSpots hotSpots;
+                    SourceImage sourceImage;
+                    for( int i=0; i<tasksJA.length(); i++) {
+
+                        taskJO = tasksJA.getJSONObject(i);
+                        hotSpotJA = taskJO.getJSONArray("hotspots");
+
+
+                        // Init Objects
+                        sourceImage = new SourceImage(taskJO.getInt("width"),
+                                taskJO.getInt("height"),
+                                taskJO.getString("image"));
+                        sourceImage.setLife( taskJO.getInt("life") );
+                        sourceImage.setIncrement_time_min( taskJO.getInt("renew_time") );
+                        sourceImage.setBase_score( taskJO.getInt("base_score") );
+
+                        // Parsing hotspots
+                        for( int j=0; j<hotSpotJA.length(); j++) {
+
+                            hotSpotJO = hotSpotJA.getJSONObject(j);
+
+                            hotSpots = new HotSpots(hotSpotJO.getDouble("x"), hotSpotJO.getDouble("y"), hotSpotJO.getBoolean("is_correct"));
+                            sourceImage.getHotSpotsArrayList().add(hotSpots);
+                        }
+
+                        sourceImageArrayList.add(sourceImage);
+
+                    }
+
+                    // Initialize contest
+                    continueSetup();
+
+                } else {
+                    startBinding.setIsDataLoaded(false);
+                    Snackbar another_warning = PSnackbar.make(findViewById(android.R.id.content), getString(R.string.could_not_connect), Snackbar.LENGTH_INDEFINITE);
+                    another_warning.setAction(getString(R.string.try_again), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            loadTasks();
+                        }
+                    }).show();
+                    another_warning.show();
+                }
+            } catch (JSONException e) {
+                startBinding.setIsDataLoaded(false);
+                e.printStackTrace();
+            }
+
+        }
+
+    } // End of processing fee
 
 }

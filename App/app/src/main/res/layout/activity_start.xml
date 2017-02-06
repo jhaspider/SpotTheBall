@@ -10,6 +10,9 @@
         <variable
             name="User"
             type="bamboobush.com.wheresx.data.User" />
+        <variable
+            name="isDataLoaded"
+            type="boolean" />
 
         <import type="android.view.View" />
     </data>
@@ -18,8 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary_dark"
+        android:visibility="@{isDataLoaded==false?View.GONE:View.VISIBLE, default=gone}"
         android:fitsSystemWindows="true">
-
 
         <!--TOP PANEL -->
         <RelativeLayout
