@@ -3,7 +3,9 @@ package bamboobush.com.wheresx;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -178,12 +180,14 @@ public class StartActivity extends AppCompatActivity
     }
 
     private void LoadImage() {
-        circular_progress.setVisibility(View.VISIBLE);
 
 
-        BitmapWorkerTask workerTask = new BitmapWorkerTask();
-        workerTask.delegate = this;
-        workerTask.execute(sourceImage.getUrl());
+                circular_progress.setVisibility(View.VISIBLE);
+                BitmapWorkerTask workerTask = new BitmapWorkerTask();
+                workerTask.delegate = this;
+                workerTask.execute(sourceImage.getUrl());
+
+
     }
 
     @Override
@@ -255,46 +259,64 @@ public class StartActivity extends AppCompatActivity
             if(hotSpots.is_correct()){
 
                 // Play correct action animation
-                success_container.setVisibility(View.VISIBLE);
-                tickAnimation.start();
+                /*success_container.setVisibility(View.VISIBLE);
+                tickAnimation.start();*/
 
                 // As soon as correct image is found, make it invisible
-                v.setVisibility(View.GONE);
-
-                // Update Score & Display
-                int wonScore = user.getLife_left() * sourceImage.getBase_score();
-                user.updateScore( getApplicationContext(), wonScore );
-
-                // Load Next Level
-                current_index++;
-                if(current_index<sourceImageArrayList.size()) {
-
-                    // Delete, if there was any previous hot spot on the stage
-                    if(hotspotImageViews.size()>0){
-                        for(int i=0; i<hotspotImageViews.size(); i++) {
-                            hotspot = hotspotImageViews.get(i);
-                            hotspot_container.removeView( hotspot );
-                        }
-                    }
-
-                    // Remove image of the current level
-                    source_image_view.setImageBitmap(null);
-                    heading_container.setVisibility(View.GONE);
-                    life_out_panel.setVisibility(View.GONE);
-
-                    // Load the next level
-                    sourceImage = sourceImageArrayList.get(current_index);
-                    user.incrementLevel(getApplicationContext());
-                    LoadImage();
-
-                    // TODO : Animate image loading
-
-
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ((ImageView) v).setImageDrawable(getDrawable(R.drawable.ic_check_circle));
                 } else {
-                    // TODO : We should never allow to run into this scenario
-                    hotspot_container.setVisibility(View.GONE);
-                    heading_container.setVisibility(View.VISIBLE);
+                    ((ImageView) v).setImageDrawable(getResources().getDrawable(R.drawable.ic_check_circle));
                 }
+
+
+                final StartActivity that = this;
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        // Update Score & Display
+                        int wonScore = user.getLife_left() * sourceImage.getBase_score();
+                        user.updateScore( getApplicationContext(), wonScore );
+
+                        // Load Next Level
+                        current_index++;
+                        if(current_index<sourceImageArrayList.size()) {
+
+                            // Delete, if there was any previous hot spot on the stage
+                            if(hotspotImageViews.size()>0){
+                                for(int i=0; i<hotspotImageViews.size(); i++) {
+                                    hotspot = hotspotImageViews.get(i);
+                                    hotspot_container.removeView( hotspot );
+                                }
+                            }
+
+                            // Remove image of the current level
+                            source_image_view.setImageBitmap(null);
+                            heading_container.setVisibility(View.GONE);
+                            life_out_panel.setVisibility(View.GONE);
+
+                            // Load the next level
+                            sourceImage = sourceImageArrayList.get(current_index);
+                            user.incrementLevel(getApplicationContext());
+
+
+                            LoadImage();
+
+                            // TODO : Animate image loading
+
+
+                        } else {
+                            // TODO : We should never allow to run into this scenario
+                            hotspot_container.setVisibility(View.GONE);
+                            heading_container.setVisibility(View.VISIBLE);
+                        }
+
+
+                    }
+                }, 1000);
+
+
 
 
             } else {
@@ -435,14 +457,19 @@ public class StartActivity extends AppCompatActivity
 
         } else {
             // Determine the scale
-            double scale = (double) source_image_view.getWidth() / (double) bitmap.getWidth();
-            if ((scale * (double) bitmap.getHeight()) > (double) source_image_view.getHeight()) {
-                scale = (double) source_image_view.getHeight() / (double) bitmap.getHeight();
+            float scale = (float) source_image_view.getWidth() / (float) bitmap.getWidth();
+            if ((scale * (float) bitmap.getHeight()) > (float) source_image_view.getHeight()) {
+                scale = (float) source_image_view.getHeight() / (float) bitmap.getHeight();
             }
             sourceImage.setScale(scale);
 
             // Setting the source image
-            source_image_view.setImageBitmap(bitmap);
+            Matrix matrix = new Matrix();
+            matrix.postScale(scale, scale);
+            /*int w = (int) scale * bitmap.getWidth();
+            int h = (int) scale * bitmap.getHeight();*/
+            //Bitmap resizedBitmap = Bitmap.createBitmap( bitmap, 0, 0,  bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            source_image_view.setImageBitmap( bitmap );
 
             // Add HotSpots on the platform
             AddHotSpots(bitmap);
@@ -454,6 +481,7 @@ public class StartActivity extends AppCompatActivity
             // Making top panel visible
             circular_progress.setVisibility(View.GONE);
             heading_container.setVisibility(View.VISIBLE);
+
         }
 
     }
