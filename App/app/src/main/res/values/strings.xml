@@ -12,4 +12,5 @@
     <string name="user_score">Your Score \n%s</string>
     <string name="could_not_connect">You must connect to internet at least once to try this game.</string>
     <string name="try_again">Try Again</string>
+    <string name="all_level_played_out">All levels played out. Play more tomorrow</string>
 </resources>

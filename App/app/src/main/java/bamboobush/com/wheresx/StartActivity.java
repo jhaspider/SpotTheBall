@@ -90,7 +90,7 @@ public class StartActivity extends AppCompatActivity
 
         // Item 1
         HotSpots hotSpots;
-        sourceImage = new SourceImage(501,
+        /*sourceImage = new SourceImage(501,
                 699,
                 "http://worldcricketevents.com/wp-content/uploads/2015/08/images-for-dhoni-helicopter-shot-against-malinga.img_.jpg");
         sourceImage.setLife(2);
@@ -102,7 +102,7 @@ public class StartActivity extends AppCompatActivity
         hotSpots = new HotSpots(160,200,false);
         sourceImage.getHotSpotsArrayList().add( hotSpots );
 
-        sourceImageArrayList.add( sourceImage );
+        sourceImageArrayList.add( sourceImage );*/
 
 
         sourceImage = new SourceImage(482,
@@ -141,7 +141,7 @@ public class StartActivity extends AppCompatActivity
         sourceImageArrayList.add( sourceImage );
 
         // Item 3
-        sourceImage = new SourceImage(800,
+        /*sourceImage = new SourceImage(800,
                 500,
                 "http://cdn.parhlo.com/wp-content/uploads/2015/02/277632621.jpg");
         sourceImage.setLife(5);
@@ -157,7 +157,7 @@ public class StartActivity extends AppCompatActivity
         hotSpots = new HotSpots(544,400,false);
         sourceImage.getHotSpotsArrayList().add( hotSpots );
 
-        sourceImageArrayList.add( sourceImage );
+        sourceImageArrayList.add( sourceImage );*/
 
         // Item 4
         sourceImage = new SourceImage(628,
@@ -176,7 +176,7 @@ public class StartActivity extends AppCompatActivity
 
         // Item 5
 
-        sourceImage = new SourceImage(500,
+        /*sourceImage = new SourceImage(500,
                 668,
                 "http://pitthoo.co.in/mahi.jpeg");
         sourceImage.setLife(5);
@@ -188,7 +188,7 @@ public class StartActivity extends AppCompatActivity
         hotSpots.setVisible(false);
         sourceImage.getHotSpotsArrayList().add( hotSpots );
 
-        sourceImageArrayList.add( sourceImage );
+        sourceImageArrayList.add( sourceImage );*/
 
 
 
@@ -197,6 +197,11 @@ public class StartActivity extends AppCompatActivity
         // Load First task
         // If user was playing some level, start from that level only
         current_index = AppUtils.getKeyInt(getApplicationContext(),AppUtils.LevelIndex);
+        if(current_index >= sourceImageArrayList.size() - 1) {
+            Snackbar snackbar = PSnackbar.make(findViewById(android.R.id.content), getString(R.string.all_level_played_out), Snackbar.LENGTH_INDEFINITE);
+            snackbar.show();
+            return;
+        }
         sourceImage = sourceImageArrayList.get(current_index);
         LoadImage();
 
